@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>♠ Blackjack ♠</h1>
+        
+        <div class="balance">
+            <h2>Balance: $<span id="balance">1000</span></h2>
+        </div>
+
+        <div class="wager">
+            <h2>Place Your Wager</h2>
+            <input type="number" id="wager-input" min="1" max="1000" step="1" placeholder="Enter wager">
+            <button id="place-wager-button"><p style = "color:black">Place Wager</p></button>
+        </div>
+
+        <div id="dealer-hand" class="hand">
+            <h2>Dealer's Hand</h2>
+            <div id="dealer-cards" class="cards"></div>
+            <p id="dealer-total"></p>
+        </div>
+
+        <div id="player-hand" class="hand">
+            <h2>Your Hand</h2>
+            <div id="player-cards" class="cards"></div>
+            <p id="player-total"></p>
+        </div>
+
+        <div class="controls">
+            <button id="hit-button">Hit</button>
+            <button id="stand-button">Stand</button>
+            <button id="new-game-button">New Game</button>
+        </div>
+
+        <p id="message"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
