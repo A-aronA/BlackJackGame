@@ -1,7 +1,7 @@
 var deck, playerHand, dealerHand;
-var balance = 1000;
+var balance = 10000;
 var currentWager = 0;
-var balanceBeforeWager = 1000;
+var balanceBeforeWager = 10000;
 
 var suitsSymbols = {
     'Hearts': '♥',
