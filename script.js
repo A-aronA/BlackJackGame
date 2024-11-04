@@ -1,7 +1,8 @@
 var deck, playerHand, dealerHand;
-var balance = 10000;
+var balance = 1000;
 var currentWager = 0;
-var balanceBeforeWager = 10000;
+var balanceBeforeWager = 1000;
+var roundInProgress = false;
 
 var suitsSymbols = {
     'Hearts': '♥',
@@ -57,10 +58,9 @@ function getCardDisplay(card) {
 }
 
 function startGame() {
+    roundInProgress = true; // Set to true when a new game starts
     document.getElementById('new-game-button').style.display = 'none';
     createDeck();
-    document.getElementById('hit-button').disabled = true;
-    document.getElementById('stand-button').disabled = true;
     clearHands();
     updateBalanceDisplay();
 }
@@ -211,6 +211,7 @@ function endGame(message) {
     }
 
     currentWager = 0;
+    roundInProgress = false;
     updateHands();
 
     document.getElementById('new-game-button').style.display = 'inline-block';
@@ -259,3 +260,31 @@ window.onload = function() {
     updateBalanceDisplay();
     startGame(); 
 };
+
+document.getElementById('wager-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        placeWager();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'e') {
+        event.preventDefault();
+        document.getElementById('wager-input').focus();
+    } else if (event.key === 'h' && !document.getElementById('hit-button').disabled) {
+        hit();
+    } else if (event.key === 's' && !document.getElementById('stand-button').disabled) {
+        stand();
+    } else if (event.key === 'n' && !document.getElementById('new-game-button').disabled) {
+        if (roundInProgress) {
+            const confirmNewGame = confirm("Are you sure you want to start a new game?");
+            if (confirmNewGame) {
+                startGame();
+                document.getElementById('message').textContent = '';
+            }
+        } else {
+            startGame(); // Start a new game directly if no round is in progress
+            document.getElementById('message').textContent = '';
+        }
+    }
+});
